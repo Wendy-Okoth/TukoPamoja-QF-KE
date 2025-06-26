@@ -13,6 +13,8 @@ contract ProjectRegistry {
         string descriptionCID;
         string category;
         bool isActive;
+        string[] imageCIDs; // New field for image CIDs/URLs
+        string[] audioCIDs; // New field for audio CIDs/URLs
     }
 
     event ProjectSubmitted(
@@ -20,7 +22,9 @@ contract ProjectRegistry {
         address indexed owner,
         string name,
         string descriptionCID,
-        string category
+        string category,
+        string[] imageCIDs, // Updated event
+        string[] audioCIDs  // Updated event
     );
 
     IAttestationService public attestationService;
@@ -37,7 +41,9 @@ contract ProjectRegistry {
     function submitProject(
         string calldata name,
         string calldata descriptionCID,
-        string calldata category
+        string calldata category,
+        string[] calldata imageCIDs, // New parameter
+        string[] calldata audioCIDs  // New parameter
     ) external {
         require(
             attestationService.hasAttestationType(msg.sender, "Artist"),
@@ -54,13 +60,15 @@ contract ProjectRegistry {
             name: name,
             descriptionCID: descriptionCID,
             category: category,
-            isActive: true
+            isActive: true,
+            imageCIDs: imageCIDs, // Assign new fields
+            audioCIDs: audioCIDs  // Assign new fields
         });
 
         _projects[projectId] = newProject;
         _activeProjectIds.push(projectId);
 
-        emit ProjectSubmitted(projectId, msg.sender, name, descriptionCID, category);
+        emit ProjectSubmitted(projectId, msg.sender, name, descriptionCID, category, imageCIDs, audioCIDs); // Emit new fields
     }
 
     function getProject(uint256 projectId) external view returns (
@@ -69,7 +77,9 @@ contract ProjectRegistry {
         string memory name,
         string memory descriptionCID,
         string memory category,
-        bool isActive
+        bool isActive,
+        string[] memory imageCIDs, // New return value
+        string[] memory audioCIDs  // New return value
     ) {
         Project storage project = _projects[projectId];
         require(project.id != 0, "Project does not exist");
@@ -79,10 +89,13 @@ contract ProjectRegistry {
             project.name,
             project.descriptionCID,
             project.category,
-            project.isActive
+            project.isActive,
+            project.imageCIDs, // Return new fields
+            project.audioCIDs  // Return new fields
         );
     }
 
+    // This function will now return Project structs with the new fields
     function getAllActiveProjects() external view returns (Project[] memory) {
         uint256 count = _activeProjectIds.length;
         Project[] memory activeProjects = new Project[](count);

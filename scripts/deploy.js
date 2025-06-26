@@ -50,6 +50,34 @@ async function main() {
     await quadraticFunding.waitForDeployment();
     console.log("QuadraticFunding deployed to:", quadraticFunding.target);
 
+    // --- Optional: Example of submitting a project with dummy media CIDs ---
+    // This is ONLY if you previously had a `submitProject` call here
+    // in your deploy script for testing or populating initial data.
+    // If you don't have this, you can skip this block.
+
+    // First, make sure the deployer has the "Artist" attestation for testing.
+    // This part requires your AttestationService to have a 'makeAttestation' function.
+    // If not, you'd need to mock it or skip this test project submission.
+    // Assuming AttestationService has a makeAttestation(address user, string calldata attestationType) function:
+    // await attestationService.makeAttestation(deployer.address, "Artist");
+    // console.log("Deployer attested as Artist for testing.");
+
+    // // Example project submission with dummy image/audio CIDs
+    // const dummyImageCIDs = ["QmHash1", "QmHash2"]; // Replace with actual CIDs if needed
+    // const dummyAudioCIDs = ["QmAudioHash1"]; // Replace with actual CIDs if needed
+
+    // console.log("\nSubmitting a dummy project to ProjectRegistry...");
+    // await projectRegistry.submitProject(
+    //   "My Awesome DApp Project",
+    //   "QmDescriptionCID123", // Example CID for description
+    //   "Decentralized App",
+    //   dummyImageCIDs,
+    //   dummyAudioCIDs
+    // );
+    // console.log("Dummy project submitted!");
+    // --- End optional section ---
+
+
     // Log all deployed addresses
     console.log("\n=== DEPLOYMENT SUMMARY ===");
     console.log("Network:", network.name);
