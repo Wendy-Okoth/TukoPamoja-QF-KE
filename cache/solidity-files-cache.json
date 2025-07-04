@@ -190,44 +190,6 @@
         "IERC20"
       ]
     },
-    "C:\\Users\\user\\Documents\\Projects\\TukoPamoja\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
-      "lastModificationDate": 1750671710130,
-      "contentHash": "794db3115001aa372c79326fcfd44b1f",
-      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
-      "solcConfig": {
-        "version": "0.8.24",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC20.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.20"
-      ],
-      "artifacts": [
-        "IERC20Metadata"
-      ]
-    },
     "C:\\Users\\user\\Documents\\Projects\\TukoPamoja\\node_modules\\@openzeppelin\\contracts\\interfaces\\draft-IERC6093.sol": {
       "lastModificationDate": 1750671709401,
       "contentHash": "267d92fe4de67b1bdb3302c08f387dbf",
@@ -264,6 +226,44 @@
         "IERC1155Errors",
         "IERC20Errors",
         "IERC721Errors"
+      ]
+    },
+    "C:\\Users\\user\\Documents\\Projects\\TukoPamoja\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol": {
+      "lastModificationDate": 1750671710130,
+      "contentHash": "794db3115001aa372c79326fcfd44b1f",
+      "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC20.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "IERC20Metadata"
       ]
     },
     "C:\\Users\\user\\Documents\\Projects\\TukoPamoja\\contracts\\QuadraticFunding.sol": {
@@ -346,9 +346,48 @@
       ]
     },
     "C:\\Users\\user\\Documents\\Projects\\TukoPamoja\\contracts\\ProjectRegistry.sol": {
-      "lastModificationDate": 1750947398705,
-      "contentHash": "fdffe8b8a41907ed308814e18adf2e70",
+      "lastModificationDate": 1751461947139,
+      "contentHash": "11d059a8db78b3153ce06a6358a2efd7",
       "sourceName": "contracts/ProjectRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "./IAttestationService.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ProjectRegistry"
+      ]
+    },
+    "C:\\Users\\user\\Documents\\Projects\\TukoPamoja\\contracts\\IAttestationService.sol": {
+      "lastModificationDate": 1751059411758,
+      "contentHash": "617f20d06feba6f81c91b63536665beb",
+      "sourceName": "contracts/IAttestationService.sol",
       "solcConfig": {
         "version": "0.8.24",
         "settings": {
@@ -375,11 +414,10 @@
       },
       "imports": [],
       "versionPragmas": [
-        "^0.8.24"
+        "^0.8.20"
       ],
       "artifacts": [
-        "IAttestationService",
-        "ProjectRegistry"
+        "IAttestationService"
       ]
     }
   }

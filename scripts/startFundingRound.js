@@ -2,32 +2,53 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-    // Get the deployer account from Hardhat (this account must be the owner of QuadraticFunding)
+    console.log("Starting funding round...");
+
+    // Get the deployer account
     const [deployer] = await ethers.getSigners();
+    console.log("Using account:", deployer.address);
 
-    // !!! IMPORTANT: THIS IS YOUR DEPLOYED QUADRATIC FUNDING CONTRACT ADDRESS (updated) !!!
-    const qfAddress = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
+    // IMPORTANT: These are the addresses from your LAST LOCAL DEPLOYMENT
+    const QUADRATIC_FUNDING_ADDRESS = "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9";
 
-    // Get the QuadraticFunding contract instance
-    const QuadraticFunding = await ethers.getContractFactory("QuadraticFunding");
-    const quadraticFunding = await QuadraticFunding.attach(qfAddress);
-
-    // Check if the round is already active
-    const roundActive = await quadraticFunding.roundActive();
-
-    if (!roundActive) {
-        console.log("Funding round is currently INACTIVE. Attempting to START round...");
-        // Call the startRound function from the deployer (owner) account
-        const tx = await quadraticFunding.connect(deployer).startRound();
-        console.log(`Transaction sent to start round: ${tx.hash}`);
-        await tx.wait(); // Wait for the transaction to be mined
-        console.log("Funding round STARTED successfully!");
-    } else {
-        console.log("Funding round is ALREADY ACTIVE. No action needed.");
+    try {
+        // Get the QuadraticFunding contract instance
+        const quadraticFunding = await ethers.getContractAt("QuadraticFunding", QUADRATIC_FUNDING_ADDRESS, deployer);
+        
+        console.log("QuadraticFunding contract address:", QUADRATIC_FUNDING_ADDRESS);
+        
+        // Check if round is already active
+        const isRoundActive = await quadraticFunding.roundActive();
+        console.log("Current round active status:", isRoundActive);
+        
+        if (isRoundActive) {
+            console.log("Funding round is already active!");
+            return;
+        }
+        
+        // Start the funding round
+        console.log("Starting new funding round...");
+        const tx = await quadraticFunding.startRound();
+        await tx.wait();
+        
+        console.log("✅ Funding round started successfully!");
+        console.log("Transaction hash:", tx.hash);
+        
+        // Verify the round is now active
+        const newRoundActive = await quadraticFunding.roundActive();
+        const roundNumber = await quadraticFunding.roundNumber();
+        console.log("New round active status:", newRoundActive);
+        console.log("Round number:", roundNumber.toString());
+        
+    } catch (error) {
+        console.error("Error starting funding round:", error);
+        process.exit(1);
     }
 }
 
-main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-});
+main()
+    .then(() => process.exit(0))
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    });
