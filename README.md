@@ -10,18 +10,22 @@ Limited User Control & Censorship Risk
 
 #Architecture: Smart Contracts
 The Tuko Pamoja DApp is built with a clear separation between its decentralized backend (smart contracts on the Celo blockchain) and its decentralized frontend (a React application hosted on IPFS).
-ProjectRegistry:
+
+#ProjectRegistry:
 Purpose: The central repository for all registered projects. It stores essential metadata for each project, including its name, owner, category, a CID (Content Identifier) pointing to its detailed description on IPFS, and CIDs for associated image and audio files.
 Key Functionality: Allows users (who meet specific criteria, e.g., holding an 'Artist' attestation) to register new projects and provides functions to retrieve project details and lists of projects by owner.
-AttestationService:
+
+#AttestationService:
 Purpose: Manages on-chain reputation and identity. It allows designated "Attestors" to issue various types of attestations (e.g., "Artist", "Verified Builder") to specific wallet addresses.
 Key Functionality:The contract owner can add or remove attestors.
 Attestors can issueAttestation to any recipient address for a given attestation type.
 Provides a way to query if an address holds a specific attestation. This is crucial for access control, as seen with project submission.
-MockERC20 (mCUSD):
+
+#MockERC20 (mCUSD):
 Purpose: A simple ERC-20 token contract that simulates a stablecoin on the Celo network (like CUSD). It's used as the currency for project contributions within the DApp.
 Key Functionality: Standard ERC-20 functions like transfer, balanceOf, approve, and allowance.
-QuadraticFunding:
+
+#QuadraticFunding:
 Purpose: Implements the core quadratic funding logic. It receives contributions in mCUSD from users, calculates matching funds based on the square root of contributions (promoting broader participation over large individual donations), and allows project owners to withdraw their accumulated funds.
 Key Functionality:
 contribute: Allows users to contribute mCUSD to a specific project.
